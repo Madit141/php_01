@@ -35,13 +35,19 @@
         </div>
     </nav>
     <div class="container">
-        <?php if ($_SERVER["REQUEST_URI"] == "/lego") { ?>
-            Вы на главной странице! =)
-        <?php } elseif ($_SERVER["REQUEST_URI"] == "/ice") { ?>
-            Тут мы вам расскажем о волшебной Галактике Андромеда
-        <?php } elseif ($_SERVER["REQUEST_URI"] == "/fire") { ?>
-            Был значит один кот, и носил он галактику в поясе Ориона
-        <?php } ?>
+        <?php 
+        $url = $_SERVER["REQUEST_URI"];
+
+        echo "Вы на странице: $url, будьте внимательны!<br>";
+
+        if ($url == "/") {
+            require "../views/main.php";
+        } elseif ($url == "/ice") {
+            require "../views/ice.php";
+        } elseif ($url == "/fire") {
+            require "../views/fire.php";
+        } 
+        ?>
     </div>
 </body>
 </html>
