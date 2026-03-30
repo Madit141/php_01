@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>LEGO Chima</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"  rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
              <i class="fa-solid fa-cubes"></i>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/lego">LEGO Chima</a>
+                <a class="nav-link active" aria-current="page" href="/">LEGO Chima</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/ice">Лед</a>
@@ -27,9 +26,6 @@
                 <li class="nav-item">
                 <a class="nav-link" href="/fire">Огонь</a>
                 </li>
-                <!-- <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li> -->
             </ul>
             </div>
         </div>
@@ -42,9 +38,9 @@
 
         if ($url == "/") {
             require "../views/main.php";
-        } elseif ($url == "/ice") {
+        } elseif (preg_match("#^/ice#", $url)) {
             require "../views/ice.php";
-        } elseif ($url == "/fire") {
+        } elseif (preg_match("#^/fire#", $url)) {
             require "../views/fire.php";
         } 
         ?>
