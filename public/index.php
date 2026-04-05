@@ -1,49 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEGO Chima</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"  rel="stylesheet" />
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-             <i class="fa-solid fa-cubes"></i>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">LEGO Chima</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/ice">Лед</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/fire">Огонь</a>
-                </li>
-            </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <?php 
-        $url = $_SERVER["REQUEST_URI"];
+<?php
+require_once '../vendor/autoload.php';
 
-        echo "Вы на странице: $url, будьте внимательны!<br>";
+$loader = new \Twig\Loader\FilesystemLoader('../views');
+$twig = new \Twig\Environment($loader);
 
-        if ($url == "/") {
-            require "../views/main.php";
-        } elseif (preg_match("#^/ice#", $url)) {
-            require "../views/ice.php";
-        } elseif (preg_match("#^/fire#", $url)) {
-            require "../views/fire.php";
-        } 
-        ?>
-    </div>
-</body>
-</html>
+$url = $_SERVER["REQUEST_URI"];
+$context = [];
+
+
+$context['menu'] = [
+    ["title" => "LEGO Chima", "url" => "/"],
+    ["title" => "Лед", "url" => "/ice"],
+    ["title" => "Огонь", "url" => "/fire"]
+];
+
+if ($url == "/") {
+    $context['title'] = "LEGO Chima";
+    $template = "main.twig";
+} 
+
+elseif (preg_match("#^/ice#", $url)) {
+    $context['title'] = "Лед";
+    $context['base_url'] = "/ice";
+    
+    if ($url == "/ice/image") {
+        $context['image'] = "/images/ice_mammoth.jpg";
+        $template = "object_image.twig";
+    } elseif ($url == "/ice/info") {
+        $template = "ice_info.twig";
+    } else {
+        $template = "__object.twig";
+    }
+} 
+
+elseif (preg_match("#^/fire#", $url)) {
+    $context['title'] = "Огонь";
+    $context['base_url'] = "/fire";
+
+    if ($url == "/fire/image") {
+        $context['image'] = "/images/fiery_temple.jpg";
+        $template = "object_image.twig";
+    } elseif ($url == "/fire/info") {
+        $template = "fire_info.twig";
+    } else {
+        $template = "__object.twig";
+    }
+}
+
+echo $twig->render($template, $context);

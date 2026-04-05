@@ -1,0 +1,14 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <ul class="nav nav-pills mb-3">
+        <li class="nav-item"><a class="nav-link" href="{{ base_url }}/image">Картинка</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ base_url }}/info">Описание</a></li>
+    </ul>
+    <div class="border p-4 rounded">
+        {% block objectContent %}
+            <p class="text-muted">Выберите раздел "Картинка" или "Описание", чтобы узнать больше о наборе.</p>
+        {% endblock %}
+    </div>
+{% endblock %}
