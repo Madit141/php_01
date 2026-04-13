@@ -1,50 +1,39 @@
 <?php
+
 require_once '../vendor/autoload.php';
+require_once '../controllers/BaseController.php';
+require_once '../controllers/TwigBaseController.php';
+require_once '../controllers/Controller404.php';
+require_once '../controllers/MainController.php';
+require_once '../controllers/IceController.php';
+require_once '../controllers/IceImageController.php';
+require_once '../controllers/IceInfoController.php';
+require_once '../controllers/FireController.php';
+require_once '../controllers/FireImageController.php';
+require_once '../controllers/FireInfoController.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader);
 
 $url = $_SERVER["REQUEST_URI"];
-$context = [];
-
-
-$context['menu'] = [
-    ["title" => "LEGO Chima", "url" => "/"],
-    ["title" => "Лед", "url" => "/ice"],
-    ["title" => "Огонь", "url" => "/fire"]
-];
+$controller = new Controller404($twig);
 
 if ($url == "/") {
-    $context['title'] = "LEGO Chima";
-    $template = "main.twig";
-} 
-
-elseif (preg_match("#^/ice#", $url)) {
-    $context['title'] = "Лед";
-    $context['base_url'] = "/ice";
-    
+    $controller = new MainController($twig);
+} elseif (preg_match("#^/ice#", $url)) {
+    $controller = new IceController($twig); 
     if ($url == "/ice/image") {
-        $context['image'] = "/images/ice_mammoth.jpg";
-        $template = "object_image.twig";
+        $controller = new IceImageController($twig);
     } elseif ($url == "/ice/info") {
-        $template = "ice_info.twig";
-    } else {
-        $template = "__object.twig";
+        $controller = new IceInfoController($twig);
     }
-} 
-
-elseif (preg_match("#^/fire#", $url)) {
-    $context['title'] = "Огонь";
-    $context['base_url'] = "/fire";
-
+} elseif (preg_match("#^/fire#", $url)) {
+    $controller = new FireController($twig); 
     if ($url == "/fire/image") {
-        $context['image'] = "/images/fiery_temple.jpg";
-        $template = "object_image.twig";
+        $controller = new FireImageController($twig);
     } elseif ($url == "/fire/info") {
-        $template = "fire_info.twig";
-    } else {
-        $template = "__object.twig";
+        $controller = new FireInfoController($twig);
     }
 }
 
-echo $twig->render($template, $context);
+$controller->get();
