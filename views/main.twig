@@ -1,15 +1,9 @@
 {% extends "__layout.twig" %}
 
 {% block content %}
-    <ul class="list-group">
-        {% for item in menu %}
-            {% if item.url != '/' %}
-                <li class="list-group-item d-flex align-items-center gap-3">
-                    <a href="{{ item.url }}" class="btn {{ item.title == 'Лед' ? 'btn-primary' : 'btn-danger' }}">{{ item.title }}</a>
-                    <a href="{{ item.url }}/image">Картинка</a>
-                    <a href="{{ item.url }}/info">Описание</a>
-                </li>
-            {% endif %}
+    <div class="d-flex gap-4">
+        {% for object in fire_and_ice %}
+            {% include "item_list.twig" with {'item': object} %}
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

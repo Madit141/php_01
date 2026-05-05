@@ -1,12 +1,12 @@
 {% extends "__layout.twig" %}
+{% import "macros.twig" as m %}
 
 {% block content %}
 <div class="text-center">
-    <img src="/images/ice_mammoth.jpg" class="img-fluid mb-4" style="max-width: 500px; opacity: 0.7;">
     <div class="alert alert-danger">
         <h2>Ой! Страница затерялась в джунглях Чимы</h2>
         <p>К сожалению, такой страницы не существует. Возможно, её заморозили мамонты или сжёг феникс.</p>
-        <a href="/" class="btn btn-warning">Вернуться в главный храм (на главную)</a>
+        {{ m.btn("Вернуться на главную", "/", true, "warning") }}
     </div>
 </div>
 {% endblock %}
