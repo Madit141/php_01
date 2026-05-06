@@ -2,6 +2,7 @@
 // класс абстрактный, чтобы нельзя было создать экземпляр
 abstract class BaseController {
     public PDO $pdo; // добавил поле
+    public array $params;
 
     public function setPDO(PDO $pdo) { // и сеттер для него
         $this->pdo = $pdo;
@@ -17,4 +18,8 @@ abstract class BaseController {
     // то метод сделаем абстрактным, ну типа кто наследуем BaseController
     // тот обязан переопределить этот метод
     abstract public function get();
+
+    public function setParams(array $params) {
+        $this->params = $params;
+    }
 }

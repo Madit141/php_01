@@ -1,14 +1,14 @@
-    {% extends "__layout.twig" %}
-{% import "macros.twig" as m %}
+{% extends "__layout.twig" %}
+{# {% import "macros.twig" as m %} #}
 
 {% block content %}
     <h1>{{ title }}</h1>
     <ul class="nav nav-pills mb-3">
-        <li class="nav-item me-2">
-            {{ m.btn("Картинка", base_url ~ "/image", template == "object_image.twig") }}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ base_url }}/image">Картинка</a>
         </li>
         <li class="nav-item">
-            {{ m.btn("Описание", base_url ~ "/info", template in ["ice_info.twig", "fire_info.twig"]) }}
+            <a class="nav-link" href="{{ base_url }}/info">Описание</a>
         </li>
     </ul>
     <div class="border p-4 rounded">

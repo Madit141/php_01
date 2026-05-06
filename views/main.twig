@@ -1,9 +1,24 @@
 {% extends "__layout.twig" %}
 
 {% block content %}
-    <div class="d-flex gap-4">
-        {% for object in fire_and_ice %}
-            {% include "item_list.twig" with {'item': object} %}
-        {% endfor %}
-    </div>
+<div class="row d-flex">
+    {% for object in fire_and_ice %}
+        <div class="col-md-4 mb-4 d-flex align-items-stretch">
+            <div class="border p-2 d-flex flex-column justify-content-between">
+                <div class="img-thumbnail mb-2" style="width: 100%; height: 210px; overflow:hidden">
+                    <img src="{{ object.image }}" style="height: 100%; width: 100%; object-fit: cover;" alt="">
+                </div>
+
+                <div class="d-flex flex-column">
+                    <a class="btn btn-primary mb-1" href="/fire_and_ice/{{ object.id }}">{{ object.title }}</a>
+                    <div class="d-flex justify-content-center">
+                        <a class="me-3" href="/fire_and_ice/{{ object.id }}/image" class="text-decoration-none">Картинка</a>
+                        <a class="me-3" href="/fire_and_ice/{{ object.id }}/info" class="text-decoration-none">Описание</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

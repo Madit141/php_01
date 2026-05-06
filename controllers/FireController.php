@@ -1,5 +1,4 @@
 <?php
-require_once "TwigBaseController.php";
 
 class FireController extends TwigBaseController {
     public $title = "Огонь";

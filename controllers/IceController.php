@@ -1,5 +1,4 @@
 <?php
-require_once "TwigBaseController.php";
 
 class IceController extends TwigBaseController {
     public $title = "Лед";
