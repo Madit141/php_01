@@ -1,19 +1,35 @@
 {% extends "__layout.twig" %}
-{# {% import "macros.twig" as m %} #}
+{% import "macros.twig" as m %}
 
 {% block content %}
     <h1>{{ title }}</h1>
     <ul class="nav nav-pills mb-3">
         <li class="nav-item">
-            <a class="nav-link" href="{{ base_url }}/image">Картинка</a>
+            <a class="nav-link {% if show == 'default' %}active {% if type == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
+               href="/fire_and_ice/{{ id }}">Общее</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ base_url }}/info">Описание</a>
+            <a class="nav-link {% if show == 'image' %}active {% if type == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
+               href="/fire_and_ice/{{ id }}?show=image">Картинка</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if show == 'info' %}active {% if type == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
+               href="/fire_and_ice/{{ id }}?show=info">Описание</a>
         </li>
     </ul>
-    <div class="border p-4 rounded">
-        {% block objectContent %}
+    <div class="border p-4 rounded 
+        {% if show == 'info' %} 
+            {% if type == 'Огонь' %} bg-warning bg-opacity-25 text-dark 
+            {% elseif type == 'Лед' %} bg-info bg-opacity-25 text-dark
+            {% endif %} 
+        {% endif %}">
+
+        {% if show == 'image' %}
+            <img src="{{ image }}" class="img-fluid" alt="{{ title }}">
+        {% elseif show == 'info' %}
+            <p>{{ info }}</p>
+        {% else %}
             <p class="text-muted">Выберите раздел "Картинка" или "Описание", чтобы узнать больше о наборе.</p>
-        {% endblock %}
+        {% endif %}
     </div>
 {% endblock %}

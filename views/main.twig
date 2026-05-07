@@ -10,10 +10,13 @@
                 </div>
 
                 <div class="d-flex flex-column">
-                    <a class="btn btn-primary mb-1" href="/fire_and_ice/{{ object.id }}">{{ object.title }}</a>
+                    <a class="btn {% if object.type == 'Огонь' %}btn-danger{% else %}btn-primary{% endif %} mb-1" 
+                       href="/fire_and_ice/{{ object.id }}">
+                        {{ object.title }}
+                    </a>
                     <div class="d-flex justify-content-center">
-                        <a class="me-3" href="/fire_and_ice/{{ object.id }}/image" class="text-decoration-none">Картинка</a>
-                        <a class="me-3" href="/fire_and_ice/{{ object.id }}/info" class="text-decoration-none">Описание</a>
+                        <a class="me-3" href="/fire_and_ice/{{ object.id }}?show=image" class="text-decoration-none">Картинка</a>
+                        <a class="me-3" href="/fire_and_ice/{{ object.id }}?show=info" class="text-decoration-none">Описание</a>
                     </div>
                 </div>
                 

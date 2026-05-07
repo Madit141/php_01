@@ -1,6 +1,7 @@
 <?php
+require_once "BaseChimaTwigController.php";
 
-class Controller404 extends TwigBaseController {
+class Controller404 extends BaseChimaTwigController {
     public $template = "404.twig"; 
     public $title = "Страница не найдена";
 

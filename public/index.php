@@ -20,7 +20,5 @@ $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/fire", FireController::class);
 $router->add("/fire_and_ice/(?P<id>\d+)", ObjectController::class); 
-$router->add("/fire_and_ice/(?P<id>\d+)/image", ObjectImageController::class);
-$router->add("/fire_and_ice/(?P<id>\d+)/info", ObjectInfoController::class);
 
 $router->get_or_default(Controller404::class);

@@ -12,9 +12,16 @@
             <i class="fa-solid fa-cubes me-2"></i>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
-                    {% for item in menu %}
+                    <!-- Оставил ссылку на главную -->
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                    </li>
+                    <!-- остальные заменил на цикл по типам -->
+                    {% for type in types %}
                         <li class="nav-item">
-                            <a class="nav-link {{ title == item.title ? 'active fw-bold' : '' }}" href="{{ item.url }}">{{ item.title }}</a>
+                            <!-- type.type -- выдает тип, 
+                                а добавление |title делает первую букву с слова большой  -->
+                            <a class="nav-link" href="/?type={{ type.type }}">{{ type.type|title }}</a>
                         </li>
                     {% endfor %}
                 </ul>
