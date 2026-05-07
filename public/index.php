@@ -18,7 +18,7 @@ $pdo = new PDO("mysql:host=localhost;dbname=legands_of_chima;charset=utf8", "roo
 
 $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
-$router->add("/fire", FireController::class);
 $router->add("/fire_and_ice/(?P<id>\d+)", ObjectController::class); 
+$router->add("/search", SearchController::class);
 
 $router->get_or_default(Controller404::class);

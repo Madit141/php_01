@@ -1,0 +1,43 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+    <h1 class="mb-1">Поиск</h1>
+
+    <form action="" method="GET" class="row g-3 align-items-end mb-4">
+        <div class="col-md-3">
+            <label class="form-label">Тип</label>
+            <select name="type" class="form-select">
+                <option value="Все">Все</option>
+                <option value="Лед">Лед</option>
+                <option value="Огонь">Огонь</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Название</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Описание</label>
+            <input type="text" name="info" class="form-control">
+        </div>
+
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </div>
+    </form>
+
+    <div class="mt-4">
+        {% for object in objects %}
+            <div class="border p-2 form-control">
+                <a href="/fire_and_ice/{{ object.id }}" class="text-primary text-decoration-underline">
+                    {{ object.title }}
+                </a>
+            </div>
+        {% else %}
+            <p>Ничего не найдено.</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}
