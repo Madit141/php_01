@@ -15,9 +15,9 @@ class TypeCreateController extends BaseChimaTwigController {
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $name = $_FILES['image']['name'];
             move_uploaded_file($_FILES['image']['tmp_name'], "../public/images/media/$name");
+            move_uploaded_file($_FILES['image']['tmp_name'], "../public/media/$name");
             $image_url = "/media/$name";
         }
-
         $sql = <<<EOL
 INSERT INTO object_types(title, image)
 VALUES(:title, :image)
