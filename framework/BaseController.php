@@ -17,7 +17,18 @@ abstract class BaseController {
     // так как рендерить необязательно twig шаблоны, а можно, например, всякий json
     // то метод сделаем абстрактным, ну типа кто наследуем BaseController
     // тот обязан переопределить этот метод
-    abstract public function get();
+    public function process_response() {
+        $method = $_SERVER['REQUEST_METHOD'];
+        $context = $this->getContext(); // вызываю context тут
+        if ($method == 'GET') {
+            $this->get($context); // а тут просто его пробрасываю внутрь
+        } else if ($method == 'POST') {
+            $this->post($context); // и здесь
+        }
+    }
+
+    public function get(array $context) {} // ну и сюда добавил в качестве параметра 
+    public function post(array $context) {} // и сюда
 
     public function setParams(array $params) {
         $this->params = $params;

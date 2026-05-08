@@ -5,9 +5,8 @@ class BaseChimaTwigController extends TwigBaseController{
     {
         $context = parent::getContext();
 
-        $query = $this->pdo->query("SELECT DISTINCT type FROM fire_and_ice ORDER BY 1");
-        $types = $query->fetchAll();
-        $context['types'] = $types;
+        $query = $this->pdo->query("SELECT * FROM object_types");
+        $context['types'] = $query->fetchAll();
 
         return $context;
     }

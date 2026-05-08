@@ -20,5 +20,7 @@ $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/fire_and_ice/(?P<id>\d+)", ObjectController::class); 
 $router->add("/search", SearchController::class);
+$router->add("/create", ChimaObjectCreateController::class);
+$router->add("/type_create", TypeCreateController::class);
 
 $router->get_or_default(Controller404::class);
