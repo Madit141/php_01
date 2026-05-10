@@ -1,0 +1,52 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+    <h1>Редактирование: {{ object.title }}</h1>
+    <hr>
+
+    {% if message %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endif %}
+
+    <form action="" method="POST" enctype="multipart/form-data" class="row g-3">
+        <div class="col-4">
+            <label class="form-label">Название</label>
+            <input type="text" class="form-control" name="title" value="{{ object.title }}">
+        </div>
+        
+        <div class="col-4">
+            <label class="form-label">Краткое описание</label>
+            <input type="text" class="form-control" name="description" value="{{ object.description }}">
+        </div>
+
+        <div class="col-4">
+            <label class="form-label">Тип</label>
+            <select class="form-control" name="type">
+                {% for t in types %}
+                    <option value="{{ t.title }}" {% if t.title == object.type %}selected{% endif %}>
+                        {{ t.title }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Полное описание</label>
+            <textarea name="info" class="form-control" rows="5">{{ object.info }}</textarea>
+        </div>
+
+        <div class="col-12">
+            <label class="form-label">Текущее изображение</label>
+            <div class="mb-2">
+                <img src="{{ object.image }}" alt="" style="width: 150px; border-radius: 8px;">
+            </div>
+            <label class="form-label">Заменить изображение (оставьте пустым, чтобы не менять)</label>
+            <input type="file" name="image" class="form-control">
+        </div>
+
+        <div class="col-12 text-end">
+            <a href="/fire_and_ice/{{ object.id }}" class="btn btn-secondary">Назад</a>
+            <button type="submit" class="btn btn-warning">Сохранить изменения</button>
+        </div>
+    </form>
+{% endblock %}

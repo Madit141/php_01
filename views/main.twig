@@ -5,7 +5,10 @@
     {% for object in fire_and_ice %}
         <div class="col-md-4 mb-4 d-flex align-items-stretch">
             <div class="border p-2 d-flex flex-column justify-content-between position-relative">
-                <div class="position-absolute" style="right: -10px; top: -10px;" >
+                <div class="position-absolute d-flex" style="right: -10px; top: -10px;" >
+                    <a href="/fire_and_ice/{{ object.id }}/edit" class="btn btn-info text-white">
+                        <i class="fas fa-edit"></i>
+                    </a>
                     <form action="/fire_and_ice/delete" method="POST">
                         <input type="hidden" name="id" value="{{object.id}}">
                         <button type="submit" class="btn btn-danger">
