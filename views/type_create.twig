@@ -1,4 +1,4 @@
-{% extends "__layout.twig" %}
+{% extends "__layout.twig" %} 
 
 {% block content %}
     <h1>Добавить новый клан</h1>
@@ -21,4 +21,37 @@
             <button type="submit" class="btn btn-primary">Создать тип</button>
         </div>
     </form>
+
+    <div class="mt-5">
+        <h2>Существующие кланы</h2>
+        <hr>
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 100px;">Иконка</th>
+                    <th>Название</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type in types %}
+                    <tr>
+                        <td>
+                            {% if type.image %}
+                                <img src="{{ type.image }}" alt="" style="width: 50px; height: 50px; object-fit: contain;">
+                            {% else %}
+                                <span class="text-muted">Нет иконки</span>
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ type.title }}</strong></td>
+                    </tr>
+                {% endfor %}
+                
+                {% if types is empty %}
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">Список кланов пока пуст</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

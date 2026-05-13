@@ -12,8 +12,12 @@ class ObjectController extends BaseChimaTwigController {
         // Забираем из GET-параметра, что именно показывать (по умолчанию - ничего)
         $context['show'] = $_GET['show'] ?? 'default';
 
-        // Тянем данные из БД
-        $query = $this->pdo->prepare("SELECT title, image, info, type FROM fire_and_ice WHERE id = :id");
+        $sql = "SELECT f.title, f.image, f.info, f.type, t.title as type_title 
+                FROM fire_and_ice f 
+                LEFT JOIN object_types t ON f.type = t.id 
+                WHERE f.id = :id";
+        
+        $query = $this->pdo->prepare($sql);
         $query->bindValue("id", $id);
         $query->execute();
         $data = $query->fetch();
@@ -23,6 +27,7 @@ class ObjectController extends BaseChimaTwigController {
             $context['image'] = $data['image'];
             $context['info'] = $data['info'];
             $context['type'] = $data['type'];
+            $context['type_title'] = $data['type_title'];
         }
 
         $context['id'] = $id;

@@ -12,6 +12,10 @@ class SearchController extends BaseChimaTwigController{
         $title = $_GET['title'] ?? '';
         $info = $_GET['info'] ?? '';
 
+        $context['search_type'] = $type;
+        $context['search_title'] = $title;
+        $context['search_info'] = $info;
+        
     $sql = <<<EOL
 SELECT id, title, type, info
 FROM fire_and_ice

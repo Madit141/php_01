@@ -4,6 +4,12 @@ require_once "BaseChimaTwigController.php";
 class TypeCreateController extends BaseChimaTwigController {
     public $template = "type_create.twig";
 
+    public function get(array $context) {
+        $query = $this->pdo->query("SELECT * FROM object_types");
+        $context['types'] = $query->fetchAll();
+
+        parent::get($context);
+    }
     public function post(array $context) {
         $title = "";
 
@@ -14,7 +20,6 @@ class TypeCreateController extends BaseChimaTwigController {
         $image_url = "";
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $name = $_FILES['image']['name'];
-            move_uploaded_file($_FILES['image']['tmp_name'], "../public/images/media/$name");
             move_uploaded_file($_FILES['image']['tmp_name'], "../public/media/$name");
             $image_url = "/media/$name";
         }

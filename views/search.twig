@@ -7,20 +7,23 @@
         <div class="col-md-3">
             <label class="form-label">Тип</label>
             <select name="type" class="form-select">
-                <option value="Все">Все</option>
-                <option value="Лед">Лед</option>
-                <option value="Огонь">Огонь</option>
+                <option value="Все" {% if search_type == 'Все' %}selected{% endif %}>Все</option>
+                {% for t in types %}
+                    <option value="{{ t.id }}" {% if search_type == t.id %}selected{% endif %}>
+                        {{ t.title }}
+                    </option>
+                {% endfor %}
             </select>
         </div>
 
         <div class="col-md-4">
             <label class="form-label">Название</label>
-            <input type="text" name="title" class="form-control">
+            <input type="text" name="title" class="form-control" value="{{ search_title }}">
         </div>
 
         <div class="col-md-4">
             <label class="form-label">Описание</label>
-            <input type="text" name="info" class="form-control">
+            <input type="text" name="info" class="form-control" value="{{ search_info }}">
         </div>
 
         <div class="col-md-1">

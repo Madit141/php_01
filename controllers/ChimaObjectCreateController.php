@@ -6,6 +6,8 @@ class ChimaObjectCreateController extends BaseChimaTwigController {
 
     public function get(array $context) // добавили параметр
     {   
+        $query = $this->pdo->query("SELECT * FROM object_types");
+        $context['types'] = $query->fetchAll();
         parent::get($context); // пробросили параметр
     }
 
@@ -31,21 +33,16 @@ INSERT INTO fire_and_ice(title, description, type, info, image)
 VALUES(:title, :description, :type, :info, :image_url)
 EOL;
 
-        // подготавливаем запрос к БД
         $query = $this->pdo->prepare($sql);
-        // привязываем параметры
-        $query->bindValue("title", $title);
-        $query->bindValue("description", $description);
-        $query->bindValue("type", $type);
-        $query->bindValue("info", $info);
-        $query->bindValue("image_url", $image_url);
-        
-        // выполняем запрос
-        $query->execute();
+        $query->execute([
+            'title' => $title,
+            'description' => $description,
+            'type' => $type,
+            'info' => $info,
+            'image_url' => $image_url
+        ]);
         
         $context['message'] = 'Вы успешно создали объект';
-        $context['id'] = $this->pdo->lastInsertId(); // получаем id нового добавленного объекта
-
         $this->get($context);
     }
 }

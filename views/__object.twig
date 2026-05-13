@@ -5,22 +5,22 @@
     <h1>{{ title }}</h1>
     <ul class="nav nav-pills mb-3">
         <li class="nav-item">
-            <a class="nav-link {% if show == 'default' %}active {% if type == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
+            <a class="nav-link {% if show == 'default' %}active {% if type_title == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
                href="/fire_and_ice/{{ id }}">Общее</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {% if show == 'image' %}active {% if type == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
+            <a class="nav-link {% if show == 'image' %}active {% if type_title == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
                href="/fire_and_ice/{{ id }}?show=image">Картинка</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {% if show == 'info' %}active {% if type == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
+            <a class="nav-link {% if show == 'info' %}active {% if type_title == 'Огонь' %}bg-danger{% endif %}{% endif %}" 
                href="/fire_and_ice/{{ id }}?show=info">Описание</a>
         </li>
     </ul>
     <div class="border p-4 rounded 
         {% if show == 'info' %} 
-            {% if type == 'Огонь' %} bg-warning bg-opacity-25 text-dark 
-            {% elseif type == 'Лед' %} bg-info bg-opacity-25 text-dark
+            {% if type_title == 'Огонь' %} bg-warning bg-opacity-25 text-dark 
+            {% elseif type_title == 'Лед' %} bg-info bg-opacity-25 text-dark
             {% endif %} 
         {% endif %}">
 

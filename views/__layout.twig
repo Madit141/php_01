@@ -21,7 +21,8 @@
                         <li class="nav-item">
                             <!-- type.type -- выдает тип, 
                                 а добавление |title делает первую букву с слова большой  -->
-                            <a class="nav-link" href="/?type={{ type.title }}">{{ type.title|title }}</a>
+                            {# <a class="nav-link" href="/?type={{ type.title }}">{{ type.title|title }}</a> #}
+                            <a class="nav-link" href="/?type={{ type.id }}">{{ type.title }}</a>
                         </li>
                     {% endfor %}
                     <li class="nav-item">

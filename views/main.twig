@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="d-flex flex-column">
-                    <a class="btn {% if object.type == 'Огонь' %}btn-danger{% else %}btn-primary{% endif %} mb-1" 
+                    <a class="btn {% if object.type_title == 'Огонь' %}btn-danger{% else %}btn-primary{% endif %} mb-1" 
                        href="/fire_and_ice/{{ object.id }}">
                         {{ object.title }}
                     </a>
