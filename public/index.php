@@ -2,6 +2,7 @@
 
 require_once '../vendor/autoload.php';
 require_once '../framework/autoload.php';
+require_once '../middlewares/LoginRequiredMiddeware.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
@@ -20,9 +21,13 @@ $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/fire_and_ice/(?P<id>\d+)", ObjectController::class); 
 $router->add("/search", SearchController::class);
-$router->add("/create", ChimaObjectCreateController::class);
-$router->add("/type_create", TypeCreateController::class);
-$router->add("/fire_and_ice/delete", ChimaObjectDeleteController::class);
-$router->add("/fire_and_ice/(?P<id>\d+)/edit", ChimaObjectUpdateController::class);
+$router->add("/create", ChimaObjectCreateController::class)
+        ->middleware(new LoginRequiredMiddeware());
+$router->add("/type_create", TypeCreateController::class)
+        ->middleware(new LoginRequiredMiddeware());
+$router->add("/fire_and_ice/delete", ChimaObjectDeleteController::class)
+        ->middleware(new LoginRequiredMiddeware());
+$router->add("/fire_and_ice/(?P<id>\d+)/edit", ChimaObjectUpdateController::class)
+        ->middleware(new LoginRequiredMiddeware());
 
 $router->get_or_default(Controller404::class);
