@@ -19,9 +19,6 @@
                     <!-- остальные заменил на цикл по типам -->
                     {% for type in types %}
                         <li class="nav-item">
-                            <!-- type.type -- выдает тип, 
-                                а добавление |title делает первую букву с слова большой  -->
-                            {# <a class="nav-link" href="/?type={{ type.title }}">{{ type.title|title }}</a> #}
                             <a class="nav-link" href="/?type={{ type.id }}">{{ type.title }}</a>
                         </li>
                     {% endfor %}
@@ -35,11 +32,33 @@
                         <a class="nav-link active aria-current="page" href="/type_create">Добавить клан</a>
                     </li>
                 </ul>
+                <form action="/set-welcome/">
+                    <input type="text" name="message" class="form-control mr-2 ml-2">
+                </form>
             </div>
         </div>
     </nav>
     <div class="container">
-        {% block content %}{% endblock %}
+        <div class="row">
+            <div class="col-md-9">
+                {% block content %}{% endblock %}
+            </div>
+
+            <div class="col-md-3">
+                <div class="p-3 bg-light border rounded shadow-sm">
+                    <h6 class="mb-3">Последние страницы которые вы посетили</h6>
+                    <div class="list-group list-group-flush">
+                        {% for url in history %}
+                            <a href="{{ url }}" class="list-group-item list-group-item-action small py-2" style="background: #f8f9fa;">
+                                {{ url }}
+                            </a>
+                        {% else %}
+                            <p class="text-muted small">История пока пуста.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

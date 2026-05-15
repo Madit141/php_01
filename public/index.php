@@ -29,5 +29,6 @@ $router->add("/fire_and_ice/delete", ChimaObjectDeleteController::class)
         ->middleware(new LoginRequiredMiddeware());
 $router->add("/fire_and_ice/(?P<id>\d+)/edit", ChimaObjectUpdateController::class)
         ->middleware(new LoginRequiredMiddeware());
+$router->add("/set-welcome/", SetWelcomeController::class);
 
 $router->get_or_default(Controller404::class);

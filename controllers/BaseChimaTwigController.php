@@ -8,6 +8,8 @@ class BaseChimaTwigController extends TwigBaseController{
         $query = $this->pdo->query("SELECT * FROM object_types");
         $context['types'] = $query->fetchAll();
 
+        $context['history'] = isset($_SESSION['history']) ? $_SESSION['history'] : [];
+        
         return $context;
     }
 }
