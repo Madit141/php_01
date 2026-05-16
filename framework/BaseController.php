@@ -18,8 +18,6 @@ abstract class BaseController {
     // то метод сделаем абстрактным, ну типа кто наследуем BaseController
     // тот обязан переопределить этот метод
     public function process_response() {
-        session_set_cookie_params(60 * 60 * 10);
-        session_start();
 
         if (!isset($_SESSION['history'])) {
             $_SESSION['history'] = [];
