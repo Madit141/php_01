@@ -2,7 +2,15 @@
 {% import "macros.twig" as m %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
+Сообщение из сессии: {{ my_session_message }}
+<br>
+Последние сообщения:<br>
+{% for m in messages %}
+    {{ m }}<br>
+{% endfor %}
+<hr>
+
+<h1>{{ title }}</h1>
     <ul class="nav nav-pills mb-3">
         <li class="nav-item">
             <a class="nav-link {% if show == 'default' %}active {% if type_title == 'Огонь' %}bg-danger{% endif %}{% endif %}" 

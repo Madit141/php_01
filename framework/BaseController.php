@@ -18,21 +18,6 @@ abstract class BaseController {
     // то метод сделаем абстрактным, ну типа кто наследуем BaseController
     // тот обязан переопределить этот метод
     public function process_response() {
-
-        if (!isset($_SESSION['history'])) {
-            $_SESSION['history'] = [];
-        }
-
-        $current_url = $_SERVER['REQUEST_URI'];
-
-        if (empty($_SESSION['history']) || $_SESSION['history'][0] !== $current_url) {
-            array_unshift($_SESSION['history'], $current_url);
-        }
-
-        if (count($_SESSION['history']) > 10) {
-            $_SESSION['history'] = array_slice($_SESSION['history'], 0, 10);
-        }
-
         $method = $_SERVER['REQUEST_METHOD'];
         $context = $this->getContext(); // вызываю context тут
         if ($method == 'GET') {

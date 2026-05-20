@@ -10,6 +10,10 @@ class BaseChimaTwigController extends TwigBaseController{
 
         $context['history'] = isset($_SESSION['history']) ? $_SESSION['history'] : [];
         
+        $context['my_session_message'] = isset($_SESSION['welcome_message']) ? $_SESSION['welcome_message'] : '';
+
+        $context['messages'] = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
+        
         return $context;
     }
 }

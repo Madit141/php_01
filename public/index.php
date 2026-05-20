@@ -3,6 +3,7 @@
 require_once '../vendor/autoload.php';
 require_once '../framework/autoload.php';
 require_once '../middlewares/LoginRequiredMiddeware.php';
+require_once '../middlewares/HistoryMiddeware.php';
 
 session_set_cookie_params(60 * 60 * 10);
 session_start();
@@ -23,6 +24,15 @@ $pdo = new PDO("mysql:host=localhost;dbname=legands_of_chima;charset=utf8", "roo
 $router = new Router($twig, $pdo);
 $router->add("/login", LoginController::class);
 $router->add("/logout", LogoutController::class);
+$router->add("/", MainController::class)
+        ->middleware(new LoginRequiredMiddeware())
+        ->middleware(new HistoryMiddeware());
+$router->add("/fire_and_ice/(?P<id>\d+)", ObjectController::class)
+        ->middleware(new LoginRequiredMiddeware())
+        ->middleware(new HistoryMiddeware());
+$router->add("/search", SearchController::class)
+        ->middleware(new LoginRequiredMiddeware())
+        ->middleware(new HistoryMiddeware());
 $router->add("/", MainController::class)
         ->middleware(new LoginRequiredMiddeware());
 $router->add("/fire_and_ice/(?P<id>\d+)", ObjectController::class)
